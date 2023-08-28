@@ -12,7 +12,7 @@
   </template>
   
   <script>
-  import BarcodeScannerLogic from '../JS/BarcodeScannerLogic';
+  import BarcodeScannerLogic from '../JS/BarcodeScannerLogic'; // Cambia la ruta según corresponda
   
   export default {
     mixins: [BarcodeScannerLogic],
@@ -38,10 +38,6 @@
     object-fit: cover;
   }
 
-  .drawingBuffer{
-    visibility: hidden !important;
-    width: 0px !important;
-    height: 0px;
-  }
+  
   </style>
   
