@@ -1,5 +1,4 @@
 
-
 export default {
   data() {
     return {
@@ -20,10 +19,19 @@ export default {
         };
         
         const response = await fetch(`http://187.216.140.74:81/SurtidoHQ.svc/Login/${this.username}/${this.password}`, requestOptions);
-        const result = await response.text();
+        const result = await response.json(); // Parsea la respuesta a JSON
         
         console.log('Respuesta GET:', result);
-        // Aquí puedes manejar la respuesta de la solicitud GET
+        
+        if (result.LoginOk) {
+          // Guardar UserId y Token en el Local Storage
+          localStorage.setItem('UserId', result.UserId);
+          localStorage.setItem('Token', result.Token);
+          localStorage.setItem('UserName', result.UserName);
+          
+          // También podrías redirigir a otra página o realizar alguna acción
+          // en caso de inicio de sesión exitoso
+        }
       } catch (error) {
         console.error('Error al realizar la solicitud GET:', error);
         // Aquí puedes manejar los errores
@@ -31,4 +39,5 @@ export default {
     }
   }
 };
+
 

@@ -1,19 +1,20 @@
 <template>
   <LoginComponent></LoginComponent>
-  
+  <BarcodeReaderComponent></BarcodeReaderComponent>
   
 </template>
 
 <script>
 
 
-import LoginComponent from './components/LoginComponent.vue'
+import LoginComponent from './components/LoginComponent.vue';
+import BarcodeReaderComponent from './components/BarcodeReaderComponent.vue';
 
 export default {
   name: 'App',
   components: {
-    
-    LoginComponent
+    LoginComponent,
+    BarcodeReaderComponent
   }
 }
 </script>
