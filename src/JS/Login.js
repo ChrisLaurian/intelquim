@@ -34,6 +34,7 @@ export default {
         }
       } catch (error) {
         console.error('Error al realizar la solicitud GET:', error);
+        alert('Usuario o contraseña incorrectos. Inténtalo nuevamente.');
         // Aquí puedes manejar los errores
       }
     }

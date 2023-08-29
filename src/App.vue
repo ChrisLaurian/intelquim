@@ -1,20 +1,21 @@
 <template>
-  <LoginComponent></LoginComponent>
-  <BarcodeReaderComponent></BarcodeReaderComponent>
+
+<div id="app">
+    <router-view></router-view>
+  </div>
+  
   
 </template>
 
 <script>
 
 
-import LoginComponent from './components/LoginComponent.vue';
-import BarcodeReaderComponent from './components/BarcodeReaderComponent.vue';
+
 
 export default {
   name: 'App',
   components: {
-    LoginComponent,
-    BarcodeReaderComponent
+    
   }
 }
 </script>
@@ -26,7 +27,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: -3em;
 }
 .drawingBuffer{
     display: none;

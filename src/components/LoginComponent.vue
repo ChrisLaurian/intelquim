@@ -17,11 +17,21 @@
   </template>
   
   <style scoped>
-
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(.9);
+  }
+}
+  
 #Logo2{
   height: 20em;
   width: 20em;
+  animation: heartbeat 10s infinite; /* Ajusta la duración y propiedades de la animación según tus preferencias */
 }
+
   .login-container {
     display: flex;
     justify-content: center;
