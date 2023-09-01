@@ -6,39 +6,58 @@ export default {
       password: ''
     };
   },
-  methods: {
-    async login() {
-      try {
-        const myHeaders = new Headers();
-        myHeaders.append("Cookie", ".ASPXAUTH=DA7659051793CDD13FB1B254608E63C37852E9B785BCB5D7F5B3D4C959BAD1645746FB2A310485206255C6A5E9681BCADF648D7529777B3C0D4EDC76012E4DC2A15F9789E1CBEDE2593D7F00D4793577A0C37D544501C78BF0F5C267185FF71A346453A82076BFF32C132F8010098D778CF9ABD70E2AA9F69B181A890628B50EE2D745A0AB81691FEDD8DF3C6FA3E09A2AFBF350159D260028F4DC18FB58DBACD8125CAC3968F8AFF12572C3FB96B062; ASP.NET_SessionId=rh11fgcnpjjtptgbqeybm303");
-        
-        const requestOptions = {
-          method: 'GET',
-          headers: myHeaders,
-          redirect: 'follow'
-        };
-        
-        const response = await fetch(`http://187.216.140.74:81/SurtidoHQ.svc/Login/${this.username}/${this.password}`, requestOptions);
-        const result = await response.json(); // Parsea la respuesta a JSON
-        
-        console.log('Respuesta GET:', result);
-        
-        if (result.LoginOk) {
-          // Guardar UserId y Token en el Local Storage
-          localStorage.setItem('UserId', result.UserId);
-          localStorage.setItem('Token', result.Token);
-          localStorage.setItem('UserName', result.UserName);
-          
-          // También podrías redirigir a otra página o realizar alguna acción
-          // en caso de inicio de sesión exitoso
-        }
-      } catch (error) {
-        console.error('Error al realizar la solicitud GET:', error);
-        alert('Usuario o contraseña incorrectos. Inténtalo nuevamente.');
-        // Aquí puedes manejar los errores
+
+methods: {
+  async performLogin() {
+    try {
+      const myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json"); // Indica que estás enviando datos JSON
+
+      const requestData = {
+        username: this.username,
+        password: this.password,
+      };
+
+      const requestOptions = {
+        method: 'POST', // Cambia el método a POST
+        headers: myHeaders,
+        body: JSON.stringify(requestData), // Convierte los datos a JSON
+      };
+
+      const response = await fetch('https://www.hidraquimsrv.com.mx:444/SurtidoHQ.svc', requestOptions);
+
+      // Verificar el estado de la respuesta
+      if (!response.ok) {
+        throw new Error(`Error en la solicitud: ${response.statusText}`);
       }
+
+      const result = await response.json();
+
+      return result;
+    } catch (error) {
+      console.error('Error al realizar la solicitud POST:', error);
+      throw error;
+    }
+  },
+  async login() {
+    try {
+      const result = await this.performLogin();
+
+      if (result && result.LoginOk) {
+        // Guardar datos en el Local Storage
+        localStorage.setItem('UserId', result.UserId);
+        localStorage.setItem('Token', result.Token);
+        localStorage.setItem('UserName', result.UserName);
+
+        // Redirigir u otras acciones en caso de inicio de sesión exitoso
+        // Puedes usar el enrutamiento de Vue para redirigir a otra página, por ejemplo.
+      } else {
+        alert('Usuario o contraseña incorrectos. Inténtalo nuevamente.');
+      }
+    } catch (error) {
+      alert('Ocurrió un error al iniciar sesión. Inténtalo nuevamente más tarde.');
+      // Puedes manejar errores específicos aquí
     }
   }
-};
-
-
+}
+}
