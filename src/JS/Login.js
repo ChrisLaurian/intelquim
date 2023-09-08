@@ -12,19 +12,29 @@ methods: {
     try {
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json"); // Indica que estás enviando datos JSON
+      
 
-      const requestData = {
+    //  const requestData = {
+    //    username: this.username,
+    //    password: this.password,
+    //  };
+
+      const raw = JSON.stringify({
         username: this.username,
         password: this.password,
-      };
+      });
 
       const requestOptions = {
         method: 'POST', // Cambia el método a POST
         headers: myHeaders,
-        body: JSON.stringify(requestData), // Convierte los datos a JSON
+        body: raw, 
+        redirect: 'follow',
       };
 
-      const response = await fetch('https://www.hidraquimsrv.com.mx:444/SurtidoHQ.svc', requestOptions);
+      const response = await fetch('https://www.hidraquimsrv.com.mx:444/SurtidoHQ.svc/LoginP', requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error, requestOptions));
 
       // Verificar el estado de la respuesta
       if (!response.ok) {
@@ -56,6 +66,7 @@ methods: {
       }
     } catch (error) {
       alert('Ocurrió un error al iniciar sesión. Inténtalo nuevamente más tarde.');
+      console.log(error);
       // Puedes manejar errores específicos aquí
     }
   }
