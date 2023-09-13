@@ -8,7 +8,7 @@ export default {
   },
 
 methods: {
-  async performLogin() {
+  async iniciarSesion() {
     try {
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json"); // Indica que estás enviando datos JSON
@@ -51,7 +51,7 @@ methods: {
   },
   async login() {
     try {
-      const result = await this.performLogin();
+      const result = await this.iniciarSesion();
 
       if (result && result.LoginOk) {
         // Guardar datos en el Local Storage
@@ -72,3 +72,41 @@ methods: {
   }
 }
 }
+
+
+/*
+import axios from "../Axios"; // Asegúrate de que la ruta sea correcta
+
+export default {
+  data() {
+    return {
+      usuario: {
+        username: "",
+        password: "",
+      },
+    };
+  },
+  methods: {
+    async iniciarSesion() {
+      try {
+        const respuesta = await axios.post("/LoginP", this.usuario);
+         if (respuesta.status === 200 && respuesta.data.authenticated) {
+          // Inicio de sesión exitoso, realiza acciones adicionales si es necesario
+          alert("Inicio de sesión exitoso");
+        } else {
+          // El inicio de sesión falló, muestra un mensaje de error
+          alert("Inicio de sesión fallido");
+        }
+        // Resto del código para el inicio de sesión
+      } catch (error) {
+        // Manejo de errores
+        console.error("Error al iniciar sesión:", error);
+        console.log(this.usuario);
+        alert("Ocurrió un error al iniciar sesión");
+      }
+    },
+  },
+};
+
+*/
+

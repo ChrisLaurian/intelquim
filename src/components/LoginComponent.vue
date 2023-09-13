@@ -1,7 +1,8 @@
 <template>
     <div class="login-container">
       <img src="../assets/img/logo2.png" alt="Imagen" class="img-fluid mx-auto d-block mt-4" id="Logo2">
-      <form @submit.prevent="login" class="login-form">
+
+      <form @submit.prevent="iniciarSesion" class="login-form">
         <h2 class="login-title">Iniciar sesión</h2>
         <div class="form-group">
           <label for="username">Usuario:</label>
