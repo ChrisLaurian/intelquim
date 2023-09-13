@@ -31,13 +31,13 @@ methods: {
         redirect: 'follow',
       };
 
-      const response = await fetch('https://www.hidraquimsrv.com.mx:444/SurtidoHQ.svc/LoginP', requestOptions)
+      const response = await fetch('https://hidraquim.intelagro.net/login', requestOptions)
       .then(response => response.text())
       .then(result => console.log(result))
       .catch(error => console.log('error', error, requestOptions));
 
       // Verificar el estado de la respuesta
-      if (!response.ok) {
+      if (!response) {
         throw new Error(`Error en la solicitud: ${response.statusText}`);
       }
 
@@ -89,7 +89,7 @@ export default {
   methods: {
     async iniciarSesion() {
       try {
-        const respuesta = await axios.post("/LoginP", this.usuario);
+        const respuesta = await axios.post("/Login", this.usuario);
          if (respuesta.status === 200 && respuesta.data.authenticated) {
           // Inicio de sesión exitoso, realiza acciones adicionales si es necesario
           alert("Inicio de sesión exitoso");
